@@ -60,7 +60,7 @@ export const services = [
     // Shown full width, as the card that shows the building side.
     wide: true,
     title: 'Full-stack Development',
-    text: "I don't just test — I love building new things too. Full-stack MERN apps (MongoDB, Express, React, Node.js) and Next.js sites: REST APIs, JWT auth, role-based dashboards, file uploads and PDF/Excel export, taken from design to deployment. Writing the code is what makes me a sharper tester — I know where it breaks.",
+    text: "I don't just test — I love building new things too. Full-stack MERN apps (MongoDB, Express, React, Node.js) and Next.js sites: REST APIs, JWT auth, role-based dashboards, file uploads and PDF/Excel export, taken from design to deployment. From idea to a live, deployed product — Not QA only; I develop, build and deploy it myself.",
     tags: ['MERN', 'React', 'Node.js', 'Express', 'MongoDB', 'Next.js', 'REST APIs'],
     // Linked under the card, so a reader can see the work, not just the claim.
     projects: ['Smart CV Generator', 'ProjectPassout', 'Ease-meds'],
