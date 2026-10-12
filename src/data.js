@@ -155,9 +155,7 @@ export const projects = [
     tags: ['Next.js', 'React', 'Framer Motion', 'SEO'],
     language: 'JavaScript',
     link: 'https://github.com/rijan0717/projectpassout-next',
-    // Real full-page screenshot, scrolled at its natural proportions
     mock: 'passout',
-    scrollShot: 'projectpassout-page.webp',
     url: 'projectpassout.vercel.app',
   },
   {
@@ -169,8 +167,10 @@ export const projects = [
     text: 'An online medicine delivery system built from scratch in core PHP and MySQL, with no backend framework.',
     features: [
       'Medicine catalogue, cart and orders',
-      'Prescription upload and doctor appointments',
-      'Admin panel for orders, users, coupons and stock',
+      'Order tracking system for customers',
+      'Prescription upload',
+      'Doctor appointment booking',
+      'Admin CMS for orders, users, coupons and stock',
     ],
     tags: ['PHP', 'MySQL', 'XAMPP'],
     language: 'PHP',
@@ -189,11 +189,14 @@ export const projects = [
     text: 'Making Tax Digital (MTD) software for UK landlords and sole traders. I run every sprint’s functional, regression and UAT cycles and act as the release gate.',
     features: [
       'Auth flows: email login, Google, Microsoft and Apple sign-in',
+      'Core modules: accounting, MTD submissions and banking',
       'REST API checks from Swagger/OpenAPI and Scalar in Postman',
       'Playwright regression suites in TypeScript and Python',
       'Real-device testing with BrowserStack and ADB',
+      'Database testing to verify data integrity behind each feature',
+      'Bug hunting through browser DevTools: console, network and layout issues',
     ],
-    tags: ['Playwright', 'Postman', 'Azure Boards', 'BrowserStack'],
+    tags: ['Playwright', 'Postman', 'Azure Boards', 'BrowserStack', 'DevTools'],
     language: 'Functional · API · UAT',
     live: 'https://rentalbux.com/',
     // Official product banner, shown whole (not cropped) on its own navy background
@@ -213,6 +216,8 @@ export const projects = [
       'TMS: My Day view of overdue, today and upcoming tasks',
       'Internal targets against statutory deadlines, up to manager review',
       'Time tracking, tickets, and Google and Microsoft SSO',
+      'RBAC: role-based access control tested across every permission and form',
+      'HRMS: employee records, leave and holiday management',
     ],
     tags: ['Functional', 'Regression', 'UAT', 'API', 'Azure Boards', 'Jira'],
     language: 'Functional · Regression · UAT',
