@@ -1,7 +1,7 @@
 export const profile = {
   firstName: 'Rijan',
   lastName: 'Pariyar',
-  role: 'QA Specialist',
+  role: 'Quality Assurance Specialist',
   tagline: 'Breaking and building software on purpose — so your users never have to.',
   location: 'Baneshwor, Kathmandu, Nepal',
   phone: '+977 9745310259',
@@ -130,8 +130,9 @@ export const projects = [
     features: [
       'AI CV score and AI job-match percentage',
       'Job-tailored AI rewrite, showing the match before and after',
-      'Two roles: job seekers apply, employers post jobs and shortlist',
-      '11 CV templates, PDF/Word import, export to PDF, Word or Excel',
+      'Drop an existing CV and have AI refine or rewrite it',
+      'Three logins: job seeker, employer and admin',
+      'Multiple professional CV templates, PDF/Word import, export to PDF, Word or Excel',
     ],
     tags: ['MERN', 'MongoDB', 'Express', 'React', 'Node.js', 'Tailwind', 'AI'],
     language: 'JavaScript',
