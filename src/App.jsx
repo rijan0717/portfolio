@@ -38,8 +38,8 @@ export default function App() {
         </main>
         <footer className="footer">
           <div className="footer-row">
-            <span>© {new Date().getFullYear()} {profile.firstName} {profile.lastName}</span>
             <span className="mono footer-tagline">Test wise &amp; Build</span>
+            <span>© {new Date().getFullYear()} {profile.firstName} {profile.lastName}</span>
           </div>
           <button
             type="button"
