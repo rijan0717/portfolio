@@ -1,18 +1,11 @@
 import { useState } from 'react'
-import emailjs from '@emailjs/browser'
 import { profile } from '../data'
 import Reveal from '../components/Reveal'
 import { ArrowUpRight, Mail, Phone, Linkedin, Github, Instagram, FileDown } from '../components/Icons'
 
-// EmailJS (emailjs.com) delivers the form straight to profile.email from the
-// browser — no backend. All three values are safe to expose: the public key is
-// meant to ship client-side. Set them in .env (see .env.example).
-const EMAILJS = {
-  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-}
-const configured = Boolean(EMAILJS.serviceId && EMAILJS.templateId && EMAILJS.publicKey)
+// Replace with a real Formspree form ID (formspree.io) before launch — this
+// placeholder returns a 404, which the error state below handles gracefully.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
 
 export default function Contact({ onOpenResume }) {
   const [copied, setCopied] = useState(false)
@@ -30,23 +23,15 @@ export default function Contact({ onOpenResume }) {
 
   const submit = async (e) => {
     e.preventDefault()
-    const form = e.target
-
-    // Bots fill every field they find; a real person never sees this one.
-    if (form.website.value) {
-      setStatus('sent')
-      return
-    }
-    if (!configured) {
-      setStatus('error')
-      return
-    }
-
     setStatus('sending')
+    const form = e.target
     try {
-      await emailjs.sendForm(EMAILJS.serviceId, EMAILJS.templateId, form, {
-        publicKey: EMAILJS.publicKey,
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
       })
+      if (!res.ok) throw new Error('Form submission failed')
       setStatus('sent')
       form.reset()
     } catch {
@@ -101,14 +86,6 @@ export default function Contact({ onOpenResume }) {
                 <span>Message</span>
                 <textarea name="message" rows={4} required />
               </label>
-              <input
-                type="text"
-                name="website"
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-                className="contact-form-hp"
-              />
               <div className="contact-form-foot">
                 <button type="submit" className="btn btn-light" disabled={status === 'sending'}>
                   {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowUpRight />
