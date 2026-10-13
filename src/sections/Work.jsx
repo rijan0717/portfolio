@@ -142,10 +142,14 @@ function ProjectCard({ project: p, index, delay, flip }) {
 export default function Work() {
   const [activeTag, setActiveTag] = useState(null)
 
-  const allTags = useMemo(() => {
-    const seen = new Set()
-    projects.forEach((p) => p.tags.forEach((t) => seen.add(t)))
-    return [...seen].sort((a, b) => a.localeCompare(b))
+  // A tag only earns a filter chip if it groups work together. One-off tags still
+  // show on their card, but as a filter they would just isolate a single project.
+  const filterTags = useMemo(() => {
+    const counts = new Map()
+    projects.forEach((p) => p.tags.forEach((t) => counts.set(t, (counts.get(t) || 0) + 1)))
+    return [...counts.entries()]
+      .filter(([, n]) => n > 1)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
   }, [])
 
   const visibleProjects = activeTag ? projects.filter((p) => p.tags.includes(activeTag)) : projects
@@ -166,16 +170,17 @@ export default function Work() {
             className={`filter-chip ${activeTag === null ? 'filter-chip--active' : ''}`}
             onClick={() => setActiveTag(null)}
           >
-            All <span className="nav-count">[{projects.length}]</span>
+            All <span className="nav-count">{projects.length}</span>
           </button>
-          {allTags.map((t) => (
+          {filterTags.map(([t, n]) => (
             <button
               key={t}
               type="button"
               className={`filter-chip ${activeTag === t ? 'filter-chip--active' : ''}`}
               onClick={() => setActiveTag((cur) => (cur === t ? null : t))}
+              aria-pressed={activeTag === t}
             >
-              {t}
+              {t} <span className="nav-count">{n}</span>
             </button>
           ))}
         </div>
