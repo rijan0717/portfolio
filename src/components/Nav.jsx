@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { projects, services } from '../data'
 import { ArrowUpRight, Menu, Close, FileDown } from './Icons'
 import ThemeToggle from './ThemeToggle'
+import Uptime from './Uptime'
 
 const links = [
   { href: '#work', label: 'Work', count: String(projects.length) },
@@ -48,6 +49,7 @@ export default function Nav({ onOpenResume }) {
       <a href="#top" className="status-pill">
         <span className="status-dot" />
         Active
+        <Uptime />
       </a>
 
       <nav className={`nav-links ${open ? 'nav-links--open' : ''}`} aria-label="Primary">
