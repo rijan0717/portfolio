@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -69,9 +69,8 @@
       (function () {
         try {
           var stored = localStorage.getItem('theme')
-          var theme = stored === 'light' || stored === 'dark'
-            ? stored
-            : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          // Dark is the default; only an explicit stored choice overrides it.
+          var theme = stored === 'light' ? 'light' : 'dark'
           document.documentElement.setAttribute('data-theme', theme)
         } catch (e) {}
       })()
