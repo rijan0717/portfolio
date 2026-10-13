@@ -1,0 +1,10 @@
+{
+  "name": "Rijan Pariyar — Quality Assurance Specialist",
+  "short_name": "Rijan Pariyar",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" }
+  ],
+  "theme_color": "#111111",
+  "background_color": "#111111",
+  "display": "standalone"
+}

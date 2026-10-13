@@ -69,7 +69,7 @@ export default function Hero({ onOpenResume }) {
           <dl className="hero-mini">
             <div><dt>3+</dt><dd>years in QA</dd></div>
             <div><dt>{projects.length}</dt><dd>projects</dd></div>
-            <div><dt>2</dt><dd>product teams</dd></div>
+            <div><dt>999+</dt><dd>defects documented</dd></div>
           </dl>
         </div>
 

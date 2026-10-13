@@ -45,9 +45,11 @@ export default function App() {
           <Contact onOpenResume={openResume} />
         </main>
         <footer className="footer">
-          <span>© {new Date().getFullYear()} {profile.firstName} {profile.lastName}</span>
-          <span className="mono">Test wise &amp; Build</span>
-          <a href="#top">Back to top ↑</a>
+          <div className="footer-row">
+            <span>© {new Date().getFullYear()} {profile.firstName} {profile.lastName}</span>
+            <span className="mono footer-tagline">Test wise &amp; Build</span>
+          </div>
+          <a href="#top" className="footer-top">Back to top <span>↑</span></a>
         </footer>
       </div>
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />

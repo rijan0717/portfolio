@@ -371,6 +371,31 @@
 .work-group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
 .work-group-head h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; letter-spacing: -.02em; }
 .work-group-head p { color: var(--muted); font-size: 15px; max-width: 520px; }
+
+/* ---------- Work: tag filter ---------- */
+.work-filters {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.work-filters-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .04em;
+  flex: none;
+}
+.work-filters-list { display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-chip {
+  font-size: 13px; font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  transition: border-color .2s, background .2s, color .2s, transform .2s var(--ease);
+}
+.filter-chip:hover { border-color: var(--ink); transform: translateY(-1px); }
+.filter-chip--active { background: var(--accent-dark); color: #fff; border-color: var(--accent-dark); }
+.filter-chip--active .nav-count { color: #bdbdbd; }
 .work-cover-text { position: relative; z-index: 1; font-size: 15px; font-weight: 600; opacity: .8; max-width: 80%; }
 
 .work-card--static { cursor: default; }

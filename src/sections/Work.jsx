@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { projects, projectGroups } from '../data'
 import SectionHead from '../components/SectionHead'
 import Reveal from '../components/Reveal'
-import { ArrowUpRight, Github } from '../components/Icons'
+import { ArrowUpRight, Github, Filter } from '../components/Icons'
 import PassoutMock from '../components/mocks/PassoutMock'
 import CvGenMock from '../components/mocks/CvGenMock'
 import EaseMedsMock from '../components/mocks/EaseMedsMock'
@@ -140,6 +140,16 @@ function ProjectCard({ project: p, index, delay, flip }) {
 }
 
 export default function Work() {
+  const [activeTag, setActiveTag] = useState(null)
+
+  const allTags = useMemo(() => {
+    const seen = new Set()
+    projects.forEach((p) => p.tags.forEach((t) => seen.add(t)))
+    return [...seen].sort((a, b) => a.localeCompare(b))
+  }, [])
+
+  const visibleProjects = activeTag ? projects.filter((p) => p.tags.includes(activeTag)) : projects
+
   return (
     <section className="section" id="work">
       <SectionHead
@@ -147,8 +157,33 @@ export default function Work() {
         label="Selected work"
         title={<>Things I&rsquo;ve <em>built</em>, and things I&rsquo;ve <em>broken</em> on purpose</>}
       />
+
+      <Reveal className="work-filters">
+        <span className="work-filters-label"><Filter width={14} height={14} /> Filter</span>
+        <div className="work-filters-list">
+          <button
+            type="button"
+            className={`filter-chip ${activeTag === null ? 'filter-chip--active' : ''}`}
+            onClick={() => setActiveTag(null)}
+          >
+            All <span className="nav-count">[{projects.length}]</span>
+          </button>
+          {allTags.map((t) => (
+            <button
+              key={t}
+              type="button"
+              className={`filter-chip ${activeTag === t ? 'filter-chip--active' : ''}`}
+              onClick={() => setActiveTag((cur) => (cur === t ? null : t))}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+      </Reveal>
+
       {projectGroups.map((g) => {
-        const items = projects.filter((p) => p.group === g.key)
+        const items = visibleProjects.filter((p) => p.group === g.key)
+        if (!items.length) return null
         return (
           <div key={g.key} className="work-group">
             <Reveal className="work-group-head">

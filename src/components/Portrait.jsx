@@ -11,6 +11,8 @@ export default function Portrait() {
         className="portrait-img"
         src={profile.photo}
         alt={`${profile.firstName} ${profile.lastName}`}
+        fetchPriority="high"
+        decoding="async"
         onError={() => setFailed(true)}
       />
     )

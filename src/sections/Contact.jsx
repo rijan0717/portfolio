@@ -3,8 +3,13 @@ import { profile } from '../data'
 import Reveal from '../components/Reveal'
 import { ArrowUpRight, Mail, Phone, Linkedin, Github, Instagram, FileDown } from '../components/Icons'
 
+// Replace with a real Formspree form ID (formspree.io) before launch — this
+// placeholder returns a 404, which the error state below handles gracefully.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+
 export default function Contact({ onOpenResume }) {
   const [copied, setCopied] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | sent | error
 
   const copy = async () => {
     try {
@@ -13,6 +18,24 @@ export default function Contact({ onOpenResume }) {
       setTimeout(() => setCopied(false), 1800)
     } catch {
       window.location.href = `mailto:${profile.email}`
+    }
+  }
+
+  const submit = async (e) => {
+    e.preventDefault()
+    setStatus('sending')
+    const form = e.target
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      })
+      if (!res.ok) throw new Error('Form submission failed')
+      setStatus('sent')
+      form.reset()
+    } catch {
+      setStatus('error')
     }
   }
 
@@ -47,6 +70,42 @@ export default function Contact({ onOpenResume }) {
           <button type="button" onClick={onOpenResume}><FileDown /> Preview résumé</button>
           <a href={profile.resume} download><FileDown /> Download résumé</a>
         </div>
+
+        <form className="contact-form" onSubmit={submit}>
+          <span className="contact-form-eyebrow mono">Or send a message directly</span>
+          {status === 'sent' ? (
+            <p className="contact-form-done">
+              Thanks — your message is in. I usually reply within a day.
+            </p>
+          ) : (
+            <>
+              <div className="contact-form-row">
+                <label>
+                  <span>Name</span>
+                  <input type="text" name="name" required autoComplete="name" />
+                </label>
+                <label>
+                  <span>Email</span>
+                  <input type="email" name="email" required autoComplete="email" />
+                </label>
+              </div>
+              <label>
+                <span>Message</span>
+                <textarea name="message" rows={4} required />
+              </label>
+              <div className="contact-form-foot">
+                <button type="submit" className="btn btn-light" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowUpRight />
+                </button>
+                {status === 'error' && (
+                  <span className="contact-form-error">
+                    Couldn&rsquo;t send — email me directly instead.
+                  </span>
+                )}
+              </div>
+            </>
+          )}
+        </form>
       </Reveal>
     </section>
   )

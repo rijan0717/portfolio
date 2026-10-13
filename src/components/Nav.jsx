@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { projects, services } from '../data'
 import { ArrowUpRight, Menu, Close, FileDown } from './Icons'
+import ThemeToggle from './ThemeToggle'
 
 const links = [
   { href: '#work', label: 'Work', count: String(projects.length) },
@@ -62,6 +63,7 @@ export default function Nav({ onOpenResume }) {
       </nav>
 
       <div className="nav-actions">
+        <ThemeToggle />
         <button type="button" className="btn btn-outline nav-resume" onClick={openResume}>
           <FileDown /> Résumé
         </button>
