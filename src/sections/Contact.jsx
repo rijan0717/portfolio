@@ -1,11 +1,18 @@
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { profile } from '../data'
 import Reveal from '../components/Reveal'
 import { ArrowUpRight, Mail, Phone, Linkedin, Github, Instagram, FileDown } from '../components/Icons'
 
-// Replace with a real Formspree form ID (formspree.io) before launch — this
-// placeholder returns a 404, which the error state below handles gracefully.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+// EmailJS (emailjs.com) delivers the form straight to profile.email from the
+// browser — no backend. All three values are safe to expose: the public key is
+// meant to ship client-side. Set them in .env (see .env.example).
+const EMAILJS = {
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+}
+const configured = Boolean(EMAILJS.serviceId && EMAILJS.templateId && EMAILJS.publicKey)
 
 export default function Contact({ onOpenResume }) {
   const [copied, setCopied] = useState(false)
@@ -23,15 +30,23 @@ export default function Contact({ onOpenResume }) {
 
   const submit = async (e) => {
     e.preventDefault()
-    setStatus('sending')
     const form = e.target
+
+    // Bots fill every field they find; a real person never sees this one.
+    if (form.website.value) {
+      setStatus('sent')
+      return
+    }
+    if (!configured) {
+      setStatus('error')
+      return
+    }
+
+    setStatus('sending')
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: new FormData(form),
+      await emailjs.sendForm(EMAILJS.serviceId, EMAILJS.templateId, form, {
+        publicKey: EMAILJS.publicKey,
       })
-      if (!res.ok) throw new Error('Form submission failed')
       setStatus('sent')
       form.reset()
     } catch {
@@ -42,33 +57,26 @@ export default function Contact({ onOpenResume }) {
   return (
     <section className="contact" id="contact">
       <Reveal className="contact-inner">
-        <span className="status-pill status-pill--dark">
-          <span className="status-dot" /> Open to work
-        </span>
-        <h2 className="contact-title">
-          Let&rsquo;s ship it <span className="outline-light">bug-free.</span>
-        </h2>
-        <p className="contact-sub">
-          Hiring a QA engineer, or have a product that needs a careful second look before
-          launch? I usually reply within a day.
-        </p>
+        <div className="contact-copy">
+          <span className="status-pill status-pill--dark">
+            <span className="status-dot" /> Open to work
+          </span>
+          <h2 className="contact-title">
+            Let&rsquo;s ship it <span className="outline-light">bug-free.</span>
+          </h2>
+          <p className="contact-sub">
+            Hiring a QA engineer, or have a product that needs a careful second look before
+            launch? I usually reply within a day.
+          </p>
 
-        <div className="contact-actions">
-          <a href={`mailto:${profile.email}`} className="btn btn-light btn-lg">
-            <Mail /> {profile.email} <ArrowUpRight />
-          </a>
-          <button className="btn btn-ghost btn-lg" onClick={copy}>
-            {copied ? 'Copied ✓' : 'Copy email'}
-          </button>
-        </div>
-
-        <div className="contact-links">
-          <a href={`tel:${profile.phone.replace(/\s/g, '')}`}><Phone /> {profile.phone}</a>
-          <a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin /> LinkedIn</a>
-          <a href={profile.github} target="_blank" rel="noreferrer"><Github /> GitHub</a>
-          <a href={profile.instagram} target="_blank" rel="noreferrer"><Instagram /> Instagram</a>
-          <button type="button" onClick={onOpenResume}><FileDown /> Preview résumé</button>
-          <a href={profile.resume} download><FileDown /> Download résumé</a>
+          <div className="contact-actions">
+            <a href={`mailto:${profile.email}`} className="btn btn-light btn-lg">
+              <Mail /> {profile.email} <ArrowUpRight />
+            </a>
+            <button className="btn btn-ghost btn-lg" onClick={copy}>
+              {copied ? 'Copied ✓' : 'Copy email'}
+            </button>
+          </div>
         </div>
 
         <form className="contact-form" onSubmit={submit}>
@@ -93,6 +101,14 @@ export default function Contact({ onOpenResume }) {
                 <span>Message</span>
                 <textarea name="message" rows={4} required />
               </label>
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="contact-form-hp"
+              />
               <div className="contact-form-foot">
                 <button type="submit" className="btn btn-light" disabled={status === 'sending'}>
                   {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowUpRight />
@@ -106,6 +122,15 @@ export default function Contact({ onOpenResume }) {
             </>
           )}
         </form>
+
+        <div className="contact-links">
+          <a href={`tel:${profile.phone.replace(/\s/g, '')}`}><Phone /> {profile.phone}</a>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin /> LinkedIn</a>
+          <a href={profile.github} target="_blank" rel="noreferrer"><Github /> GitHub</a>
+          <a href={profile.instagram} target="_blank" rel="noreferrer"><Instagram /> Instagram</a>
+          <button type="button" onClick={onOpenResume}><FileDown /> Preview résumé</button>
+          <a href={profile.resume} download><FileDown /> Download résumé</a>
+        </div>
       </Reveal>
     </section>
   )

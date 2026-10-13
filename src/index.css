@@ -533,6 +533,7 @@ button { font: inherit; cursor: pointer; }
   background: radial-gradient(circle, rgba(255,255,255,.12), transparent 65%);
   pointer-events: none;
 }
+.contact-copy { display: grid; gap: 24px; justify-items: start; align-content: start; }
 .contact-title { font-size: clamp(44px, 8.5vw, 120px); font-weight: 800; letter-spacing: -.04em; line-height: .95; }
 .outline-light { color: var(--accent-dark); -webkit-text-stroke: 3px #fff; paint-order: stroke fill; display: inline-block; }
 .contact-sub { color: #a8a8a8; font-size: 18px; line-height: 1.6; max-width: 560px; }
@@ -545,7 +546,7 @@ button { font: inherit; cursor: pointer; }
 .footer {
   display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
   margin: 0 var(--gutter);
-  padding: 26px 0 96px;
+  padding: 20px 0 28px;
   border-top: 1px solid var(--line);
   font-size: 13px; color: var(--muted); font-weight: 600;
 }
@@ -659,7 +660,7 @@ button.pill { font-family: inherit; color: inherit; }
 .contact-links button:hover { color: #fff; }
 
 .contact-form {
-  width: 100%; margin-top: 28px; padding: 28px clamp(18px, 3vw, 28px) clamp(26px, 3vw, 32px);
+  width: 100%; margin-top: 28px; align-self: start; padding: 28px clamp(18px, 3vw, 28px) clamp(26px, 3vw, 32px);
   background: rgba(255,255,255,.035);
   border: 1px solid rgba(255,255,255,.1);
   border-radius: 18px;
@@ -687,11 +688,27 @@ button.pill { font-family: inherit; color: inherit; }
   outline: none; border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.1);
   box-shadow: 0 0 0 3px rgba(255,255,255,.08);
 }
+.contact-form-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .contact-form-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
 .contact-form-error { color: #f3a5a5; font-size: 13.5px; font-weight: 600; }
 .contact-form-done {
   color: #fff; font-size: 16.5px; font-weight: 600; line-height: 1.5;
   padding: 6px 0 2px;
+}
+
+/* Wide screens: the pitch holds the left column, the form sits on the right,
+   and the links run full width underneath both. Below 980px it all stacks. */
+@media (min-width: 981px) {
+  .contact-inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    column-gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+  /* The headline loses horizontal room in a column, so it scales off the column, not the page. */
+  .contact-title { font-size: clamp(44px, 6.2vw, 88px); }
+  .contact-sub { max-width: 46ch; }
+  .contact-form { margin-top: 6px; }
+  .contact-links { grid-column: 1 / -1; margin-top: 32px; }
 }
 
 @media (max-width: 560px) {
@@ -919,14 +936,12 @@ button.pill { font-family: inherit; color: inherit; }
 .loader-ok { color: #16a34a; }
 .loader-screen.is-fading .loader-spin { animation-play-state: paused; }
 
+/* Sits in the middle of the footer row, between the copyright and "Back to top". */
 .bug-replay {
-  position: fixed; right: 20px; bottom: 20px; z-index: 50;
   display: inline-flex; align-items: center; gap: 7px;
   padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line);
   background: var(--paper); color: var(--ink);
   font-size: 12.5px; font-weight: 600;
-  box-shadow: 0 10px 24px -10px rgba(0,0,0,.25);
-  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  transition: transform .25s var(--ease), border-color .2s, color .2s;
 }
-.bug-replay:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -10px rgba(0,0,0,.3); }
-@media (max-width: 640px) { .bug-replay span { display: none; } }
+.bug-replay:hover { transform: translateY(-2px); border-color: var(--ink); }

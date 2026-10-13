@@ -47,7 +47,7 @@ export default function Nav({ onOpenResume }) {
       <span className="nav-progress" ref={progressRef} aria-hidden="true" />
       <a href="#top" className="status-pill">
         <span className="status-dot" />
-        Open to work
+        Active
       </a>
 
       <nav className={`nav-links ${open ? 'nav-links--open' : ''}`} aria-label="Primary">

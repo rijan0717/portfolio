@@ -22,14 +22,6 @@ export default function App() {
   return (
     <div className="backdrop">
       <PageLoader key={loaderKey} />
-      <button
-        type="button"
-        className="bug-replay"
-        onClick={() => setLoaderKey((k) => k + 1)}
-        aria-label="Replay the loading bug"
-      >
-        🐞 <span>Replay the bug</span>
-      </button>
       <div className="sheet">
         <Nav onOpenResume={openResume} />
         <main>
@@ -49,6 +41,14 @@ export default function App() {
             <span>© {new Date().getFullYear()} {profile.firstName} {profile.lastName}</span>
             <span className="mono footer-tagline">Test wise &amp; Build</span>
           </div>
+          <button
+            type="button"
+            className="bug-replay"
+            onClick={() => setLoaderKey((k) => k + 1)}
+            aria-label="Replay the loading bug"
+          >
+            🐞 <span>Replay the bug</span>
+          </button>
           <a href="#top" className="footer-top">Back to top <span>↑</span></a>
         </footer>
       </div>
