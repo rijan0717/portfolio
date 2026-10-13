@@ -544,13 +544,19 @@ button { font: inherit; cursor: pointer; }
 
 /* ---------- Footer ---------- */
 .footer {
-  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  display: flex; flex-direction: column; align-items: stretch; gap: 18px;
   margin: 0 var(--gutter);
   padding: 20px 0 28px;
   border-top: 1px solid var(--line);
   font-size: 13px; color: var(--muted); font-weight: 600;
 }
-.footer-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+/* Three tracks so "Replay the bug" sits dead centre regardless of how wide
+   the tagline or the "Back to top" pill are. */
+.footer-row {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px;
+}
+.footer-row > :last-child { justify-self: end; }
+.footer-copy { text-align: center; }
 .footer-tagline { color: var(--faint); font-size: 12px; }
 .footer-top {
   display: inline-flex; align-items: center; gap: 8px;
@@ -638,10 +644,10 @@ button { font: inherit; cursor: pointer; }
   }
   .contact-links > :first-child { grid-column: 1 / -1; }
   .contact-links a, .contact-links button { font-size: 14px; }
-  .footer { justify-content: center; text-align: center; gap: 14px; }
-  /* Full width so the tagline and copyright centre on their own lines,
-     leaving the two pills to share the row beneath. */
-  .footer-row { flex: 0 0 100%; flex-direction: column; align-items: center; gap: 8px; }
+  .footer { text-align: center; gap: 14px; }
+  /* Tagline centres on its own line, leaving the two pills to share the row beneath. */
+  .footer-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+  .footer-tagline { flex: 0 0 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -39,17 +39,17 @@ export default function App() {
         <footer className="footer">
           <div className="footer-row">
             <span className="mono footer-tagline">Test wise &amp; Build</span>
-            <span>© {new Date().getFullYear()} {profile.firstName} {profile.lastName}</span>
+            <button
+              type="button"
+              className="bug-replay"
+              onClick={() => setLoaderKey((k) => k + 1)}
+              aria-label="Replay the loading bug"
+            >
+              🐞 <span>Replay the bug</span>
+            </button>
+            <a href="#top" className="footer-top">Back to top <span>↑</span></a>
           </div>
-          <button
-            type="button"
-            className="bug-replay"
-            onClick={() => setLoaderKey((k) => k + 1)}
-            aria-label="Replay the loading bug"
-          >
-            🐞 <span>Replay the bug</span>
-          </button>
-          <a href="#top" className="footer-top">Back to top <span>↑</span></a>
+          <span className="footer-copy">© {new Date().getFullYear()} {profile.firstName} {profile.lastName}</span>
         </footer>
       </div>
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
