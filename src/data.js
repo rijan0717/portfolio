@@ -20,7 +20,7 @@ export const summary =
 export const stats = [
   { value: '3+', label: 'Years in quality assurance' },
   { value: '999+', label: 'Defects documented to date' },
-  { value: '12+', label: 'Testing types: functional to performance' },
+  { value: '13+', label: 'Testing types: functional to performance' },
   { value: '2', label: 'Product teams, fintech SaaS & e-commerce' },
 ]
 
@@ -83,7 +83,7 @@ export const experience = [
       'Integrated **Claude (LLM) into Azure Boards** to auto-draft defect tickets and generate daily QA progress reports.',
       'Act as the **release gate**: PR reviews in GitHub, plus smoke and regression checks on web and mobile before each deployment.',
     ],
-    stack: ['Manual testing', 'Mobile app testing', 'BrowserStack', 'ADB', 'Playwright', 'TypeScript', 'Python', 'Postman', 'Azure Boards'],
+    stack: ['Manual testing', 'Mobile app testing', 'BrowserStack', 'ADB', 'Playwright', 'TypeScript', 'Python', 'Postman', 'Azure Boards', 'MongoDB'],
   },
   {
     company: 'Matat Nepal',
@@ -197,7 +197,7 @@ export const projects = [
       'Database testing to verify data integrity behind each feature',
       'Bug hunting through browser DevTools: console, network and layout issues',
     ],
-    tags: ['Functional', 'Regression', 'UAT', 'API', 'Playwright', 'TypeScript', 'Postman', 'Azure Boards', 'BrowserStack', 'DevTools', 'AI'],
+    tags: ['Functional', 'Regression', 'UAT', 'API', 'Playwright', 'TypeScript', 'Postman', 'Azure Boards', 'BrowserStack', 'MongoDB', 'DevTools', 'AI'],
     language: 'Functional · API · UAT',
     live: 'https://rentalbux.com/',
     // Official product banner, shown whole (not cropped) on its own navy background
@@ -264,7 +264,7 @@ export const process = [
 export const skills = [
   { group: 'Automation', items: ['Playwright (TS, JS, Python)', 'Cypress (JS)', 'Page Object Model'] },
   { group: 'API testing', items: ['Postman', 'Swagger / OpenAPI', 'Scalar', 'REST'] },
-  { group: 'Testing types', items: ['Manual & exploratory', 'Mobile app (Android & iOS)', 'Functional', 'Non-functional', 'Regression', 'Smoke', 'Sanity', 'UAT', 'UI/UX', 'Cross-browser & device', 'Performance (JMeter)'] },
+  { group: 'Testing types', items: ['Manual & exploratory', 'Mobile app (Android & iOS)', 'Functional', 'Non-functional', 'Regression', 'Smoke', 'Sanity', 'UAT', 'UI/UX', 'Cross-browser & device', 'Database testing (MongoDB)', 'Performance (JMeter)'] },
   { group: 'Test management', items: ['Azure Boards', 'Jira', 'ClickUp', 'Asana', 'Git', 'GitHub'] },
   { group: 'Full-stack (MERN)', items: ['MERN stack', 'MongoDB', 'Express.js', 'React.js', 'Node.js', 'Next.js', 'REST API development'] },
   { group: 'Tools & platforms', items: ['WordPress', 'Shopify', 'WSL (Ubuntu)', 'BrowserStack', 'ADB', 'Chrome DevTools', 'XAMPP'] },
