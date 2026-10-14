@@ -3,9 +3,11 @@ import { profile } from '../data'
 import Reveal from '../components/Reveal'
 import { ArrowUpRight, Mail, Phone, Linkedin, Github, Instagram, FileDown } from '../components/Icons'
 
-// Replace with a real Formspree form ID (formspree.io) before launch — this
-// placeholder returns a 404, which the error state below handles gracefully.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+// Formspree form ID (formspree.io). Not a secret — it ships in the client
+// bundle either way — so it lives here as the default. Override it per
+// environment with VITE_FORMSPREE_ID if the form ever needs swapping.
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || 'moejkzdn'
+const FORMSPREE_ENDPOINT = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : null
 
 export default function Contact({ onOpenResume }) {
   const [copied, setCopied] = useState(false)
@@ -23,13 +25,31 @@ export default function Contact({ onOpenResume }) {
 
   const submit = async (e) => {
     e.preventDefault()
-    setStatus('sending')
     const form = e.target
+    const data = new FormData(form)
+
+    // Honeypot: people leave this hidden field empty, bots fill it in.
+    if (data.get('_gotcha')) {
+      setStatus('sent')
+      form.reset()
+      return
+    }
+
+    if (!FORMSPREE_ENDPOINT) {
+      // No backend configured — hand the message to the visitor's mail client.
+      const body = `${data.get('message')}\n\n— ${data.get('name')} (${data.get('email')})`
+      window.location.href =
+        `mailto:${profile.email}?subject=${encodeURIComponent('Portfolio enquiry')}` +
+        `&body=${encodeURIComponent(body)}`
+      return
+    }
+
+    setStatus('sending')
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { Accept: 'application/json' },
-        body: new FormData(form),
+        body: data,
       })
       if (!res.ok) throw new Error('Form submission failed')
       setStatus('sent')
@@ -84,18 +104,33 @@ export default function Contact({ onOpenResume }) {
               </div>
               <label>
                 <span>Message</span>
-                <textarea name="message" rows={4} required />
+                <textarea name="message" rows={4} required minLength={10} />
               </label>
+
+              {/* Formspree reads _subject for the notification subject line. */}
+              <input type="hidden" name="_subject" value="New message from your portfolio" />
+              <input
+                type="text"
+                name="_gotcha"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', opacity: 0 }}
+              />
+
               <div className="contact-form-foot">
                 <button type="submit" className="btn btn-light" disabled={status === 'sending'}>
                   {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowUpRight />
                 </button>
                 {status === 'error' && (
                   <span className="contact-form-error">
-                    Couldn&rsquo;t send — email me directly instead.
+                    Couldn&rsquo;t send — <a href={`mailto:${profile.email}`}>email me directly</a>.
                   </span>
                 )}
               </div>
+              <p className="contact-form-status" role="status" aria-live="polite">
+                {status === 'sending' ? 'Sending your message…' : ''}
+              </p>
             </>
           )}
         </form>

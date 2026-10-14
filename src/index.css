@@ -971,3 +971,15 @@ button.pill { font-family: inherit; color: inherit; }
   transition: transform .25s var(--ease), border-color .2s, color .2s;
 }
 .bug-replay:hover { transform: translateY(-2px); border-color: var(--ink); }
+
+/* Announces send progress to screen readers without showing on screen. */
+.contact-form-status {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.contact-form-error a { color: inherit; text-decoration: underline; }
