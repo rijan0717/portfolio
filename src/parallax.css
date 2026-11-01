@@ -44,6 +44,7 @@
   display: inline-flex; align-items: center; gap: 8px;
   padding: 8px 14px 8px 8px;
   font-family: var(--mono); font-size: 12.5px; font-weight: 500; white-space: nowrap;
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis;
   color: var(--accent-dark);
   background: rgba(255,255,255,.88);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -71,11 +72,11 @@
 .hero-badge--dev i { background: #22c55e; color: #052e16; font-weight: 800; }
 
 /* Positions around the centred portrait */
-.hero-badge--tl { left: calc(50% - 25cqi); top: 6%; animation-delay: .9s, 0s; }
-.hero-badge--tr { left: calc(50% + 12cqi); top: 20%; animation-delay: 1.05s, -1.5s; }
-.hero-badge--ml { left: calc(50% - 28cqi); top: 33%; animation-delay: 1.2s, -3s; }
-.hero-badge--mr { left: calc(50% + 15cqi); top: 52%; animation-delay: 1.35s, -4.5s; }
-.hero-badge--br { left: calc(50% + 9cqi); top: 72%; animation-delay: 1.5s, -2.2s; }
+.hero-badge--tl { left: max(calc(var(--intro-right) + 16px), calc(50% - 25cqi)); top: 4%; animation-delay: .9s, 0s; }
+.hero-badge--tr { left: auto; right: max(var(--socials-clear), calc(50% - 12cqi - 183px)); top: 22%; animation-delay: 1.05s, -1.5s; }
+.hero-badge--ml { left: max(calc(var(--intro-right) + 16px), calc(50% - 28cqi)); top: 48%; animation-delay: 1.2s, -3s; }
+.hero-badge--mr { left: auto; right: max(var(--socials-clear), calc(50% - 15cqi - 168px)); top: 64%; animation-delay: 1.35s, -4.5s; }
+.hero-badge--br { left: auto; right: max(var(--socials-clear), calc(50% - 9cqi - 198px)); top: 80%; animation-delay: 1.5s, -2.2s; }
 
 @keyframes badgeIn { from { opacity: 0; transform: scale(.85) translateY(10px); } }
 @keyframes badgeFloat { 50% { transform: translateY(-9px); } }
@@ -104,7 +105,7 @@
     translate: none; opacity: 1;
   }
   .hero-badge i { width: 20px; height: 20px; font-size: 11px; }
-  .hero-badge--tl { left: 2cqi; right: auto; top: 4%; }
+  .hero-badge--tl { left: 2cqi; right: auto; top: 7%; }
   .hero-badge--tr { left: auto; right: 2cqi; top: 22%; }
   .hero-badge--ml { left: 2cqi; right: auto; top: 44%; }
   .hero-badge--mr { left: auto; right: 2cqi; top: 62%; }

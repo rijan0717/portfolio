@@ -56,7 +56,7 @@
 }
 
 /* ---------- Stronger hero intro ---------- */
-.hero-intro { max-width: clamp(290px, 27cqi, 400px); bottom: clamp(24px, 6svh, 90px); }
+.hero-intro { max-width: var(--intro-w); bottom: clamp(24px, 6svh, 90px); }
 .hero-eyebrow {
   display: inline-block;
   font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase;

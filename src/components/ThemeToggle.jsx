@@ -4,8 +4,8 @@ import { Sun, Moon } from './Icons'
 function getInitialTheme() {
   const stored = window.localStorage.getItem('theme')
   if (stored === 'light' || stored === 'dark') return stored
-  // Dark is the default for first-time visitors, regardless of OS preference.
-  return 'dark'
+  // Light is the default for first-time visitors, regardless of OS preference.
+  return 'light'
 }
 
 export default function ThemeToggle() {
