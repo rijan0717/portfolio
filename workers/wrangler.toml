@@ -1,0 +1,27 @@
+# Deploy the view counter from this folder:
+#   npx wrangler login      (one-off, opens a browser)
+#   npx wrangler deploy
+#
+# `id` is the KV namespace id from the Cloudflare dashboard
+# (Storage & Databases -> KV -> the row's ID column).
+
+name = "portfoli-views"
+main = "views-counter.js"
+compatibility_date = "2026-11-25"
+
+[[kv_namespaces]]
+binding = "VIEWS"
+id = "c6f1258322744a67b4bf5e509c974c35"
+
+# Mirrors what is already set in the dashboard, so a deploy from here does not
+# turn Workers Logs back off.
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[observability.traces]
+enabled = false
+head_sampling_rate = 1
+persist = true

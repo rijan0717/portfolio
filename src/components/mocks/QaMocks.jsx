@@ -34,33 +34,122 @@ export function RentalBuxMock() {
   )
 }
 
-const figsPoints = [
-  '30-day free trial, no card required',
-  'One record from first enquiry to final invoice',
-  'Proposals and engagement letters in seconds',
-  'AML built into onboarding, not bolted on',
+const figsNav = ['Platform', 'Solutions', 'Why FigsFlow', 'Resources', 'Pricing']
+
+// The four stages of the client record, as the marketing site lays them out.
+const figsStages = [
+  {
+    no: '01',
+    name: 'Win',
+    tag: 'Sales',
+    card: 'New clients',
+    meta: '3 new',
+    rows: [
+      { text: 'Bramble Cafe', chip: 'Won', tone: 'green' },
+      { text: 'Rowan & …', chip: 'Proposal', tone: 'violet' },
+      { text: 'H. Mistry', chip: 'Enquiry', tone: 'grey' },
+    ],
+  },
+  {
+    no: '02',
+    name: 'Onboard',
+    tag: 'Compliance',
+    card: 'AML / ID checks',
+    rows: [
+      { text: 'Identity verified', done: true },
+      { text: 'Sanctions & PEP screening', done: true },
+      { text: 'AML check passed', chip: 'Passed', tone: 'green' },
+    ],
+  },
+  {
+    no: '03',
+    name: 'Deliver',
+    tag: 'Work',
+    card: 'Recurring & deadlines',
+    rows: [
+      { text: 'VAT return Q2', done: true, chip: 'Filed', tone: 'grey' },
+      { text: 'Payroll · Oct', done: true, chip: '19 Oct', tone: 'grey' },
+      { text: 'VAT return Q3', chip: '7 Nov', tone: 'amber' },
+    ],
+  },
+  {
+    no: '04',
+    name: 'Get paid',
+    tag: 'Billing',
+    card: 'Billing & invoices',
+    meta: 'INV-2061',
+    rows: [
+      { text: '$1,450.00', chip: 'Draft', tone: 'violet' },
+      { text: 'Payments received', done: true },
+      { text: '$1,450.00 · awaiting', chip: 'INV-2061', tone: 'grey' },
+    ],
+  },
+]
+
+const figsAwards = [
+  { title: 'Proposal Software of the Year', body: 'Winner · SME500 UK 2026' },
+  { title: 'AML/KYC Solution of the Year', body: 'Winner · SME500 UK 2026' },
 ]
 
 export function FigsFlowMock() {
   return (
     <div className="ff-mock" aria-hidden="true">
-      <span className="ff-logo">figsflow</span>
+      <div className="ff-strip"><span>⊕ Global ⌄</span></div>
+
+      <div className="ff-nav">
+        <span className="ff-logo">figsflow</span>
+        <span className="ff-links">
+          {figsNav.map((n) => <span key={n}>{n}</span>)}
+        </span>
+        <span className="ff-demo">Book a Demo</span>
+      </div>
+
       <div className="ff-grid">
         <div className="ff-left">
-          <span className="ff-pill">ONE PRACTICE ERP</span>
-          <h4>The whole practice,<br /><b>on one</b> client record.</h4>
-          <ul>{figsPoints.map((p) => <li key={p}>{p}</li>)}</ul>
+          <span className="ff-pill"><i />Live in the UK <em>· US launches this fall</em></span>
+          <h4>One client record.<br /><b>Every step of the job.</b></h4>
+          <p>
+            FigsFlow is practice management software for accounting firms. Win the client,
+            sign the letter, run the work and get paid from a single record, with your
+            country&rsquo;s rules already built in.
+          </p>
+          <div className="ff-ctas">
+            <span className="ff-btn">Choose your region →</span>
+            <span className="ff-btn ff-btn--ghost">See how it connects</span>
+          </div>
+          <div className="ff-awards">
+            {figsAwards.map((a) => (
+              <span key={a.title} className="ff-award">
+                <i>🏆</i>
+                <em><b>{a.title}</b>{a.body}</em>
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="ff-card">
-          <h5>Sign in to FigsFlow</h5>
-          <p>Run your firm from lead to signed engagement.</p>
-          <label>Email address <b>*</b></label>
-          <span className="ff-input">✉ Enter your email</span>
-          <label>Password <b>*</b> <em>Forgot password?</em></label>
-          <span className="ff-input">🔒 Enter your password</span>
-          <span className="ff-btn">Sign in</span>
-          <span className="ff-or">Or continue with</span>
-          <div className="ff-sso"><span>G</span><span className="ff-ms"><i /><i /><i /><i /></span></div>
+
+        <div className="ff-app">
+          <div className="ff-app-bar">
+            <span className="ff-av">BC</span>
+            <span className="ff-client"><em>Client record</em><b>Bramble Cafe Ltd</b></span>
+            <span className="ff-chip ff-chip--green">Active client</span>
+          </div>
+          <div className="ff-stages">
+            {figsStages.map((s) => (
+              <div key={s.no} className="ff-stage">
+                <span className="ff-stage-h"><i>{s.no}</i>{s.name}<em>{s.tag}</em></span>
+                <div className="ff-stage-card">
+                  <span className="ff-stage-t">{s.card}{s.meta && <em>{s.meta}</em>}</span>
+                  {s.rows.map((r) => (
+                    <span key={r.text} className="ff-row">
+                      <i className={r.done ? 'is-done' : ''}>{r.done ? '✓' : ''}</i>
+                      {r.text}
+                      {r.chip && <b className={`ff-chip ff-chip--${r.tone}`}>{r.chip}</b>}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -154,10 +243,11 @@ export function TmsMock() {
   )
 }
 
-// FigsFlow as one product: the CRM (real figsflow.com screenshot) and the TMS
-// "My Day" dashboard, switchable with tabs and cycling on their own.
+// FigsFlow as one product: the platform page (the client record from Win to
+// Get paid) and the TMS "My Day" dashboard, switchable with tabs and cycling
+// on their own.
 const suiteViews = [
-  { key: 'crm', label: 'CRM', sub: 'Client record' },
+  { key: 'crm', label: 'Platform', sub: 'One client record' },
   { key: 'tms', label: 'TMS', sub: 'My Day' },
 ]
 
@@ -192,7 +282,7 @@ export function FigsFlowSuiteMock() {
       </div>
       <div className="fs-stage" aria-hidden="true">
         <div className={`fs-pane ${view === 'crm' ? 'is-on' : ''}`}>
-          <img className="fs-shot" src="/projects/figsflow.webp" alt="" loading="lazy" />
+          <FigsFlowMock />
         </div>
         <div className={`fs-pane ${view === 'tms' ? 'is-on' : ''}`}>
           <TmsMock />

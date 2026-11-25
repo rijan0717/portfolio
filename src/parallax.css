@@ -41,9 +41,9 @@
 .hero-badges { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .hero-badge {
   position: absolute;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 14px 8px 8px;
-  font-family: var(--mono); font-size: 12.5px; font-weight: 500; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 11px 4px 4px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500; white-space: nowrap;
   max-width: 100%; overflow: hidden; text-overflow: ellipsis;
   color: var(--accent-dark);
   background: rgba(255,255,255,.88);
@@ -60,23 +60,24 @@
 .hero-badge i {
   font-style: normal; flex: none;
   display: grid; place-items: center;
-  width: 24px; height: 24px; border-radius: 50%;
-  font-size: 12px; font-weight: 700;
+  width: 20px; height: 20px; border-radius: 50%;
+  font-size: 10px; font-weight: 700;
 }
 .hero-badge--ok i { background: #dcfce7; color: #15803d; }
 .hero-badge--api i { background: #dbeafe; color: #1d4ed8; }
-.hero-badge--bug i { background: #fee2e2; }
+.hero-badge--bug i { background: #fee2e2; color: #dc2626; }
 .hero-badge--pw i { background: #111; color: #fff; font-size: 9px; }
 /* Developer badge: a tiny terminal line */
 .hero-badge--dev { background: rgba(17,17,17,.92); color: #e5e7eb; border-color: #262626; }
 .hero-badge--dev i { background: #22c55e; color: #052e16; font-weight: 800; }
 
-/* Positions around the centred portrait */
-.hero-badge--tl { left: max(calc(var(--intro-right) + 16px), calc(50% - 25cqi)); top: 4%; animation-delay: .9s, 0s; }
-.hero-badge--tr { left: auto; right: max(var(--socials-clear), calc(50% - 12cqi - 183px)); top: 22%; animation-delay: 1.05s, -1.5s; }
-.hero-badge--ml { left: max(calc(var(--intro-right) + 16px), calc(50% - 28cqi)); top: 48%; animation-delay: 1.2s, -3s; }
-.hero-badge--mr { left: auto; right: max(var(--socials-clear), calc(50% - 15cqi - 168px)); top: 64%; animation-delay: 1.35s, -4.5s; }
-.hero-badge--br { left: auto; right: max(var(--socials-clear), calc(50% - 9cqi - 198px)); top: 80%; animation-delay: 1.5s, -2.2s; }
+/* Positions around the centred portrait. The vertical slots are chosen so the
+   badges sit beside the head or below the jaw, never across the face. */
+.hero-badge--tl { left: max(calc(var(--intro-right) + 16px), calc(50% - 25cqi)); top: 2%; animation-delay: .9s, 0s; }
+.hero-badge--tr { left: auto; right: max(var(--socials-clear), calc(50% - 12cqi - 183px)); top: 20%; animation-delay: 1.05s, -1.5s; }
+.hero-badge--ml { left: max(calc(var(--intro-right) + 16px), calc(50% - 28cqi)); top: 74%; animation-delay: 1.2s, -3s; }
+.hero-badge--mr { left: auto; right: max(var(--socials-clear), calc(50% - 15cqi - 168px)); top: 62%; animation-delay: 1.35s, -4.5s; }
+.hero-badge--br { left: auto; right: max(var(--socials-clear), calc(50% - 9cqi - 198px)); top: 84%; animation-delay: 1.5s, -2.2s; }
 
 @keyframes badgeIn { from { opacity: 0; transform: scale(.85) translateY(10px); } }
 @keyframes badgeFloat { 50% { transform: translateY(-9px); } }
@@ -101,20 +102,22 @@
   /* Badge layer sized to the photo, not the whole stage */
   .hero-badges { inset: auto; top: 0; left: 0; right: 0; height: max(300px, min(70cqi, 56svh)); }
   .hero-badge {
-    font-size: 11px; padding: 5px 10px 5px 5px; gap: 6px;
+    font-size: 10px; padding: 3px 9px 3px 3px; gap: 5px;
     translate: none; opacity: 1;
   }
-  .hero-badge i { width: 20px; height: 20px; font-size: 11px; }
-  .hero-badge--tl { left: 2cqi; right: auto; top: 7%; }
-  .hero-badge--tr { left: auto; right: 2cqi; top: 22%; }
-  .hero-badge--ml { left: 2cqi; right: auto; top: 44%; }
-  .hero-badge--mr { left: auto; right: 2cqi; top: 62%; }
-  .hero-badge--br { left: 6cqi; right: auto; top: 80%; }
+  .hero-badge i { width: 17px; height: 17px; font-size: 9px; }
+  /* Stacked, the photo fills the column, so there is no clear band beside the
+     head: the badges go above the hair and below the jaw instead. */
+  .hero-badge--tl { left: 2cqi; right: auto; top: 1%; }
+  .hero-badge--tr { left: auto; right: 2cqi; top: 10%; }
+  .hero-badge--ml { left: 2cqi; right: auto; top: 73%; }
+  .hero-badge--mr { left: auto; right: 2cqi; top: 82%; }
+  .hero-badge--br { left: 6cqi; right: auto; top: 91%; }
 }
 @media (max-width: 640px) {
   .hero-badges { height: min(100cqi, 440px); }
-  .hero-badge { font-size: 10px; padding: 4px 9px 4px 4px; }
-  .hero-badge i { width: 18px; height: 18px; font-size: 10px; }
+  .hero-badge { font-size: 9px; padding: 3px 8px 3px 3px; }
+  .hero-badge i { width: 16px; height: 16px; font-size: 9px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

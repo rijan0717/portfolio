@@ -1,7 +1,7 @@
 export const profile = {
   firstName: 'Rijan',
   lastName: 'Pariyar',
-  role: 'Quality Assurance Specialist',
+  role: 'Full Stack Quality Assurance',
   tagline: 'Breaking and building software on purpose — so your users never have to.',
   location: 'Baneshwor, Kathmandu, Nepal',
   phone: '+977 9745310259',
@@ -15,14 +15,52 @@ export const profile = {
 }
 
 export const summary =
-  "Quality Assurance Specialist with **3+ years** across **fintech SaaS and e-commerce**, covering the full test cycle from test design to **release sign-off**. I build automated regression suites in **Playwright and Cypress**, test **REST APIs** end to end from their OpenAPI specs, and have wired an **AI assistant** into the Azure Boards workflow to remove repetitive admin."
+  "Full-stack QA with **3+ years** across **fintech SaaS and e-commerce**, covering the full test cycle from test design to **release sign-off**. I build automated regression suites in **Playwright and Cypress**, test **REST APIs** end to end from their OpenAPI specs, and have wired an **AI assistant** into the Azure Boards workflow to remove repetitive admin. I also **build the products I test** — full-stack **MERN** apps and **Next.js** sites, from REST APIs, auth and role-based dashboards through to deployment — so I read a codebase and a bug report the same way."
 
-export const stats = [
-  { value: '3+', label: 'Years in quality assurance' },
-  { value: '999+', label: 'Defects documented to date' },
-  { value: '13+', label: 'Testing types: functional to performance' },
-  { value: '2', label: 'Product teams, fintech SaaS & e-commerce' },
+// Dates worth celebrating. Each one fires on its day/month every year and
+// counts the years elapsed since `since`, so nothing needs updating annually.
+// `month` is 1-indexed. Ordered by how they should win if two ever collide.
+export const milestones = [
+  {
+    key: 'birthday',
+    day: 22,
+    month: 4,
+    since: 2005,
+    emoji: '🎂',
+    // n is the number of years since `since`, worked out on the day.
+    title: (n) => `Turning ${n} today`,
+    text: () => 'Another year of breaking software on purpose.',
+  },
+  {
+    key: 'sterling-wells',
+    day: 12,
+    month: 11,
+    since: 2025,
+    emoji: '🎉',
+    title: (n) => `${n} year${n === 1 ? '' : 's'} at Sterling Wells`,
+    text: () => 'Testing fintech SaaS — RentalBux, FigsFlow TMS and CRM.',
+  },
+  {
+    key: 'experience',
+    day: 1,
+    month: 8,
+    since: 2023,
+    emoji: '🚀',
+    title: (n) => `${n} year${n === 1 ? '' : 's'} in quality assurance`,
+    text: () => 'From e-commerce QA to release gatekeeping on fintech SaaS.',
+  },
 ]
+
+// The milestone falling on `date`, or null on an ordinary day.
+export function milestoneOn(date = new Date()) {
+  const d = date.getDate()
+  const m = date.getMonth() + 1
+  const hit = milestones.find((x) => x.day === d && x.month === m)
+  if (!hit) return null
+  const years = date.getFullYear() - hit.since
+  if (years < 1) return null
+  return { ...hit, years, title: hit.title(years), text: hit.text(years) }
+}
 
 export const tools = [
   'Playwright', 'Cypress', 'TypeScript', 'Python', 'Postman', 'Swagger / OpenAPI',
@@ -60,10 +98,10 @@ export const services = [
     // Shown full width, as the card that shows the building side.
     wide: true,
     title: 'Full-stack Development',
-    text: "I don't just test — I love building new things too. Full-stack MERN apps (MongoDB, Express, React, Node.js) and Next.js sites: REST APIs, JWT auth, role-based dashboards, file uploads and PDF/Excel export, taken from design to deployment. From idea to a live, deployed product — Not QA only; I develop, build and deploy it myself.",
-    tags: ['MERN', 'React', 'Node.js', 'Express', 'MongoDB', 'Next.js', 'REST APIs'],
+    text: "I don't just test — I love building new things too. Full-stack MERN apps (MongoDB, Express, React, Node.js) and Next.js sites: REST APIs, JWT auth, role-based dashboards, file uploads and PDF/Excel export. Cross-platform mobile applications in Flutter, with real-time order and location tracking over Socket.io and live maps, on a Node.js backend. From idea to a live, deployed product — not QA only; I develop, build and deploy it myself.",
+    tags: ['MERN', 'React', 'Node.js', 'Express', 'MongoDB', 'Next.js', 'REST APIs', 'Flutter', 'Dart', 'Socket.io'],
     // Linked under the card, so a reader can see the work, not just the claim.
-    projects: ['Smart CV Generator', 'ProjectPassout', 'Ease-meds'],
+    projects: ['Smart CV Generator', 'Valley Express', 'ProjectPassout', 'Ease-meds'],
   },
 ]
 
@@ -124,7 +162,7 @@ export const projects = [
     group: 'built',
     featured: true,
     title: 'Smart CV Generator',
-    repo: 'cv-generator-MERN',
+    repo: 'cv-generator',
     kind: 'Full-stack · MERN',
     text: 'A full-stack MERN app: a CV builder with a job board built in. Job seekers get an AI score out of 100 and an AI match % for every job; employers post jobs and review applicants.',
     features: [
@@ -136,9 +174,29 @@ export const projects = [
     ],
     tags: ['MERN', 'API', 'MongoDB', 'Express', 'React', 'Node.js', 'Tailwind', 'AI'],
     language: 'JavaScript',
-    link: 'https://github.com/rijan0717/cv-generator-MERN',
+    link: 'https://github.com/rijan0717/cv-generator',
     mock: 'cvgen',
     url: 'smart-cv-generator',
+  },
+  {
+    group: 'built',
+    featured: true,
+    title: 'Valley Express',
+    kind: 'Flutter · Node.js · Real-time',
+    text: 'An on-demand delivery app for snacks, drinks and essentials across Kathmandu Valley: a Node.js/Express/MongoDB backend, a React (Vite) admin dashboard for operations, and one Flutter codebase serving both customers and riders. It gives a small local store a Pathao-style ordering, dispatch and delivery system.',
+    features: [
+      'One Flutter codebase for the customer app and the rider app',
+      'Real-time order status and rider GPS over Socket.io, mapped on OpenStreetMap',
+      'Payments by eSewa, Khalti or cash on delivery',
+      'React (Vite) admin dashboard for orders, riders and zones',
+      'Integrated Maps API: address search, drop-off pin and live route tracking',
+      'Sign in with Google',
+    ],
+    tags: ['Flutter', 'Dart', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'React', 'REST APIs'],
+    language: 'Dart',
+    org: 'Personal project',
+    mock: 'valley',
+    url: 'valley-express',
   },
   {
     group: 'built',
@@ -179,7 +237,6 @@ export const projects = [
     mock: 'easemeds',
     url: 'localhost/Ease-meds',
   },
-
   // ---------- Tested ----------
   {
     group: 'qa',
@@ -208,13 +265,13 @@ export const projects = [
   {
     group: 'qa',
     featured: true,
-    title: 'FigsFlow (CRM & TMS)',
+    title: 'FigsFlow (TMS & CRM)',
     org: 'Sterling Wells',
-    kind: 'Practice management · CRM & TMS',
-    text: 'Practice management software for accounting firms: the CRM runs one client record from enquiry to billing, and the TMS runs the work itself. I test both every sprint.',
+    kind: 'Practice management · TMS & CRM',
+    text: 'Practice management software for accounting firms: the TMS runs the work itself, and the CRM runs one client record from enquiry to billing. I test both every sprint.',
     features: [
-      'CRM: lead → proposal → engagement letter → billing, with AML at onboarding',
       'TMS: My Day view of overdue, today and upcoming tasks',
+      'CRM: lead → proposal → engagement letter → billing, with AML at onboarding',
       'Internal targets against statutory deadlines, up to manager review',
       'Time tracking, tickets, and Google and Microsoft SSO',
       'RBAC: role-based access control tested across every permission and form',
@@ -223,7 +280,7 @@ export const projects = [
     tags: ['Functional', 'Regression', 'UAT', 'API', 'Azure Boards', 'Jira', 'AI'],
     language: 'Functional · Regression · UAT',
     live: 'https://figsflow.com/',
-    // One frame, two modules: real CRM screenshot + rebuilt TMS dashboard
+    // One frame, two modules: the rebuilt marketing/platform page + TMS dashboard
     mock: 'figsflowSuite',
     url: 'figsflow.com',
   },
@@ -259,6 +316,14 @@ export const process = [
   { step: 'Report', text: 'File reproducible defects with severity, priority and evidence, drafted with AI help.' },
   { step: 'Automate', text: 'Add stable flows to the Playwright and Cypress regression suites.' },
   { step: 'Sign off', text: 'Run smoke and regression checks before every deployment, then give the go or no-go.' },
+]
+
+// Counted off the project list so it never drifts out of date.
+export const stats = [
+  { value: '3+', label: 'Years in quality assurance' },
+  { value: '999+', label: 'Defects documented to date' },
+  { value: '13+', label: 'Testing types: functional to performance' },
+  { value: String(projects.filter((p) => p.group === 'built').length), label: 'Projects I developed' },
 ]
 
 export const skills = [

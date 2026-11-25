@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Nav from './components/Nav'
+import Celebration from './components/Celebration'
 import PageLoader from './components/PageLoader'
 import ResumeModal from './components/ResumeModal'
 import Hero from './sections/Hero'
@@ -13,6 +14,7 @@ import Process from './sections/Process'
 import Skills from './sections/Skills'
 import Contact from './sections/Contact'
 import { profile } from './data'
+import { BugSolid } from './components/Icons'
 
 export default function App() {
   const [resumeOpen, setResumeOpen] = useState(false)
@@ -24,6 +26,7 @@ export default function App() {
       <PageLoader key={loaderKey} />
       <div className="sheet">
         <Nav onOpenResume={openResume} />
+        <Celebration />
         <main>
           <Hero onOpenResume={openResume} />
           <Marquee />
@@ -45,7 +48,7 @@ export default function App() {
               onClick={() => setLoaderKey((k) => k + 1)}
               aria-label="Replay the loading bug"
             >
-              🐞 <span>Replay the bug</span>
+              <BugSolid width={15} height={15} /> <span>Replay the bug</span>
             </button>
             <a href="#top" className="footer-top">Back to top <span>↑</span></a>
           </div>

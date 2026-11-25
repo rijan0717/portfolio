@@ -2,13 +2,13 @@ import { useRef } from 'react'
 import { profile, projects } from '../data'
 import Portrait from '../components/Portrait'
 import { useHeroParallax } from '../components/useHeroParallax'
-import { ArrowUpRight, Linkedin, Github, Instagram, Mail, FileDown } from '../components/Icons'
+import { ArrowUpRight, Linkedin, Github, Instagram, Mail, FileDown, BugSolid } from '../components/Icons'
 
 // Decorative QA badges floating around the portrait at different parallax depths.
 const badges = [
   { text: 'All checks passed', icon: '✓', tone: 'ok', pos: 'tl', depth: 1.4 },
   { text: 'GET /api · 200 OK', icon: '⇄', tone: 'api', pos: 'tr', depth: 2.2 },
-  { text: 'Bug caught pre-release', icon: '🐞', tone: 'bug', pos: 'ml', depth: 1.8 },
+  { text: 'Bug caught pre-release', Icon: BugSolid, tone: 'bug', pos: 'ml', depth: 1.8 },
   { text: 'Playwright · TS', icon: '▶', tone: 'pw', pos: 'mr', depth: 1.1 },
   // The one "build" badge: I develop too, not only test.
   { text: 'npm run dev → ready', icon: '$', tone: 'dev', pos: 'br', depth: 1.6 },
@@ -47,7 +47,7 @@ export default function Hero({ onOpenResume }) {
               className={`hero-badge hero-badge--${b.pos} hero-badge--${b.tone}`}
               style={{ '--d': b.depth }}
             >
-              <i>{b.icon}</i>
+              <i>{b.Icon ? <b.Icon width={11} height={11} /> : b.icon}</i>
               {b.text}
             </span>
           ))}
@@ -58,7 +58,9 @@ export default function Hero({ onOpenResume }) {
           <h2>{profile.role}</h2>
           <p>
             <strong>Playwright &amp; Cypress</strong> automation, API testing and debugging,
-            integrating <strong>AI</strong> into daily workflows, and always building something new.
+            integrating <strong>AI</strong> into daily workflows &mdash; and building what I test:{' '}
+            <strong>MERN</strong> web applications, <strong>Next.js</strong> sites and{' '}
+            <strong>Flutter</strong> mobile apps, from REST API to deployment.
           </p>
           <div className="hero-ctas">
             <a href="#contact" className="btn btn-dark">

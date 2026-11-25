@@ -4,7 +4,7 @@ import Reveal from '../components/Reveal'
 
 export default function Process() {
   return (
-    <section className="section">
+    <section className="section section--desktop">
       <SectionHead
         index="06"
         label="Process"

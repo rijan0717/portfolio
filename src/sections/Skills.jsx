@@ -4,7 +4,7 @@ import Reveal from '../components/Reveal'
 
 export default function Skills() {
   return (
-    <section className="section" id="skills">
+    <section className="section section--desktop" id="skills">
       <SectionHead index="07" label="Toolkit" title={<>The <em>stack</em> behind the sign-off</>} />
       <div className="skills">
         {skills.map((s, i) => (

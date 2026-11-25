@@ -1,11 +1,18 @@
-import { services } from '../data'
+import { services, projects } from '../data'
 import SectionHead from '../components/SectionHead'
 import Reveal from '../components/Reveal'
 import { serviceIcons } from '../components/Icons'
 
+// A named project links straight to its repo or live site; one with neither
+// (not every build is public) falls back to its card in the work section.
+function projectHref(name) {
+  const p = projects.find((x) => x.title === name)
+  return p?.link || p?.live || '#work'
+}
+
 export default function Services() {
   return (
-    <section className="section" id="services">
+    <section className="section section--desktop" id="services">
       <SectionHead
         index="02"
         label="Services"
@@ -28,12 +35,21 @@ export default function Services() {
               </div>
               {s.projects && (
                 <p className="service-projects">
-                  Built: {s.projects.map((name, n) => (
-                    <span key={name}>
-                      {n > 0 && ' · '}
-                      <a href="#work">{name}</a>
-                    </span>
-                  ))}
+                  Built: {s.projects.map((name, n) => {
+                    const href = projectHref(name)
+                    const ext = href !== '#work'
+                    return (
+                      <span key={name}>
+                        {n > 0 && ' · '}
+                        <a
+                          href={href}
+                          {...(ext ? { target: '_blank', rel: 'noreferrer' } : {})}
+                        >
+                          {name}{ext && ' ↗'}
+                        </a>
+                      </span>
+                    )
+                  })}
                 </p>
               )}
             </Reveal>

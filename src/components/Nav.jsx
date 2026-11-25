@@ -3,10 +3,12 @@ import { projects, services } from '../data'
 import { ArrowUpRight, Menu, Close, FileDown } from './Icons'
 import ThemeToggle from './ThemeToggle'
 import Uptime from './Uptime'
+import ViewCount from './ViewCount'
 
 const links = [
   { href: '#work', label: 'Work', count: String(projects.length) },
-  { href: '#services', label: 'Services', count: String(services.length) },
+  // Services is hidden on phones, so its link goes with it.
+  { href: '#services', label: 'Services', count: String(services.length), desktopOnly: true },
   { href: '#experience', label: 'Experience', count: '3y+' },
   { href: '#contact', label: 'Contact' },
 ]
@@ -50,11 +52,17 @@ export default function Nav({ onOpenResume }) {
         <span className="status-dot" />
         Active
         <Uptime />
+        <ViewCount />
       </a>
 
       <nav className={`nav-links ${open ? 'nav-links--open' : ''}`} aria-label="Primary">
         {links.map((l) => (
-          <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+          <a
+            key={l.href}
+            href={l.href}
+            className={l.desktopOnly ? 'nav-link--desktop' : undefined}
+            onClick={() => setOpen(false)}
+          >
             {l.label}
             {l.count && <span className="nav-count">[{l.count}]</span>}
           </a>

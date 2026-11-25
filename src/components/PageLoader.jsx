@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { BugSolid } from './Icons'
 
 // A full-screen "Loading" spinner (three tilted, continuously spinning rings)
 // shown on every load. It's deliberately stuck: the rings keep spinning well
@@ -52,7 +53,7 @@ export default function PageLoader() {
         <span className="loader-label">Loading</span>
       </div>
       <div className="loader-status">
-        {phase === 'stuck' && <span className="loader-bug">🐞 stuck — known issue</span>}
+        {phase === 'stuck' && <span className="loader-bug"><BugSolid width={13} height={13} /> stuck — known issue</span>}
         {phase === 'fixed' && <span className="loader-ok">✓ patched, continuing</span>}
       </div>
     </div>

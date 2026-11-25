@@ -6,12 +6,14 @@ import { ArrowUpRight, Github, Filter } from '../components/Icons'
 import PassoutMock from '../components/mocks/PassoutMock'
 import CvGenMock from '../components/mocks/CvGenMock'
 import EaseMedsMock from '../components/mocks/EaseMedsMock'
+import ValleyMock from '../components/mocks/ValleyMock'
 import { RentalBuxMock, FigsFlowMock, FigsFlowSuiteMock, TmsMock, BugSheetMock, PlaywrightMock } from '../components/mocks/QaMocks'
 
 const mocks = {
   passout: PassoutMock,
   cvgen: CvGenMock,
   easemeds: EaseMedsMock,
+  valley: ValleyMock,
   rentalbux: RentalBuxMock,
   figsflow: FigsFlowMock,
   tms: TmsMock,
@@ -24,6 +26,7 @@ const langColors = {
   TypeScript: '#3178c6',
   JavaScript: '#f1e05a',
   PHP: '#4f5d95',
+  Dart: '#00b4ab',
 }
 
 // A full-page screenshot shown at its real proportions (full width, natural

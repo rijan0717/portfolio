@@ -70,8 +70,8 @@ export default function Contact({ onOpenResume }) {
             Let&rsquo;s ship it <span className="outline-light">bug-free.</span>
           </h2>
           <p className="contact-sub">
-            Hiring a QA engineer, or have a product that needs a careful second look before
-            launch? I usually reply within a day.
+            Hiring a full stack QA engineer, or have a product that needs a careful second
+            look before launch? I usually reply within a day.
           </p>
 
           <div className="contact-actions">
