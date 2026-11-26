@@ -57,10 +57,10 @@ export default function Hero({ onOpenResume }) {
           <span className="hero-eyebrow mono">QA × Dev · Kathmandu, Nepal</span>
           <h2>{profile.role}</h2>
           <p>
-            <strong>Playwright &amp; Cypress</strong> automation, API testing and debugging,
-            integrating <strong>AI</strong> into daily workflows &mdash; and building what I test:{' '}
-            <strong>MERN</strong> web applications, <strong>Next.js</strong> sites and{' '}
-            <strong>Flutter</strong> mobile apps, from REST API to deployment.
+            End-to-end automation with <strong>Playwright &amp; Cypress</strong>, API testing and
+            debugging, and <strong>AI</strong> embedded in my daily workflow. I also develop the
+            products I test &mdash; <strong>MERN</strong> web applications, <strong>Next.js</strong>{' '}
+            sites and <strong>Flutter</strong> mobile apps, from REST API through to deployment.
           </p>
           <div className="hero-ctas">
             <a href="#contact" className="btn btn-dark">

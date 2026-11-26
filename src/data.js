@@ -1,7 +1,7 @@
 export const profile = {
   firstName: 'Rijan',
   lastName: 'Pariyar',
-  role: 'Full Stack Quality Assurance',
+  role: 'Quality Assurance Engineer',
   tagline: 'Breaking and building software on purpose — so your users never have to.',
   location: 'Baneshwor, Kathmandu, Nepal',
   phone: '+977 9745310259',
@@ -15,7 +15,7 @@ export const profile = {
 }
 
 export const summary =
-  "Full-stack QA with **3+ years** across **fintech SaaS and e-commerce**, covering the full test cycle from test design to **release sign-off**. I build automated regression suites in **Playwright and Cypress**, test **REST APIs** end to end from their OpenAPI specs, and have wired an **AI assistant** into the Azure Boards workflow to remove repetitive admin. I also **build the products I test** — full-stack **MERN** apps and **Next.js** sites, from REST APIs, auth and role-based dashboards through to deployment — so I read a codebase and a bug report the same way."
+  "**QA engineer** with **3+ years** across **fintech SaaS and e-commerce**, covering the full test cycle from test design to **release sign-off**. I build automated regression suites in **Playwright and Cypress**, test **REST APIs** end to end from their OpenAPI specs, and have wired an **AI assistant** into the Azure Boards workflow to remove repetitive admin. I also **develop the products I test** — full-stack **MERN** apps and **Next.js** sites, from REST APIs, auth and role-based dashboards through to deployment — so I read a codebase and a bug report the same way."
 
 // Dates worth celebrating. Each one fires on its day/month every year and
 // counts the years elapsed since `since`, so nothing needs updating annually.
